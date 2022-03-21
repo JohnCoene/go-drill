@@ -1,6 +1,6 @@
 module github.com/factset/go-drill
 
-go 1.14
+go 1.15
 
 require (
 	github.com/apache/arrow/go/v7 v7.0.0
