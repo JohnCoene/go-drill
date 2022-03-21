@@ -89,8 +89,8 @@ jobs:
         run: |
           sudo chmod +rwx -R /opt
           mkdir /opt/drill
-          sh -c 'wget -O - http://apache.mirrors.hoobly.com/drill/drill-1.17.0/apache-drill-1.17.0.tar.gz | tar -xz'
-          mv apache-drill-1.17.0/* /opt/drill/
+          sh -c 'wget -O - http://apache.mirrors.hoobly.com/drill/drill-1.19.0/apache-drill-1.19.0.tar.gz | tar -xz'
+          mv apache-drill-1.19.0/* /opt/drill/
           cp smoketest/storage-plugins-override.conf /opt/drill/conf/
           if [ $KERBEROS = "true" ]; then
             cp smoketest/drill-override-kerberos.conf /opt/drill/conf/drill-override.conf
