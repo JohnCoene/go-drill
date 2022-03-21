@@ -5,11 +5,11 @@ package data
 import (
 	"reflect"
 
-	"github.com/apache/arrow/go/arrow"
-	"github.com/apache/arrow/go/arrow/array"
-	"github.com/apache/arrow/go/arrow/bitutil"
-	"github.com/apache/arrow/go/arrow/decimal128"
-	"github.com/apache/arrow/go/arrow/memory"
+	"github.com/apache/arrow/go/v7/arrow"
+	"github.com/apache/arrow/go/v7/arrow/array"
+	"github.com/apache/arrow/go/v7/arrow/bitutil"
+	"github.com/apache/arrow/go/v7/arrow/decimal128"
+	"github.com/apache/arrow/go/v7/arrow/memory"
 	"github.com/factset/go-drill/internal/rpc/proto/common"
 	"github.com/factset/go-drill/internal/rpc/proto/exec/shared"
 )
@@ -51,6 +51,10 @@ func ArrowTypeToReflect(typ arrow.DataType) reflect.Type {
 		return reflect.TypeOf(arrow.Date64(0))
 	case arrow.TIME32:
 		return reflect.TypeOf(arrow.Time32(0))
+        case arrow.INTERVAL_MONTHS:
+                return reflect.TypeOf(arrow.MonthInterval(0))
+        case arrow.INTERVAL_DAY_TIME:
+                return reflect.TypeOf(arrow.DayTimeInterval{})
 	case arrow.INTERVAL:
 		switch typ.(type) {
 		case *arrow.DayTimeIntervalType:

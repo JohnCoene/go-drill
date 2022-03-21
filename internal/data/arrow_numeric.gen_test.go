@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/apache/arrow/go/arrow"
-	"github.com/apache/arrow/go/arrow/array"
+	"github.com/apache/arrow/go/v7/arrow"
+	"github.com/apache/arrow/go/v7/arrow/array"
 	"github.com/factset/go-drill/internal/data"
 	"github.com/factset/go-drill/internal/rpc/proto/common"
 	"github.com/stretchr/testify/assert"

@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql/driver"
 	"errors"
-	"io"
 	"net"
 	"strings"
 	"sync"
@@ -531,7 +530,7 @@ func TestClientReqFailUnmarshal(t *testing.T) {
 
 			val, err := tt.call(cl)
 			assert.Nil(t, val)
-			assert.Same(t, io.ErrUnexpectedEOF, err)
+                        assert.ErrorIs(t, err, proto.Error)
 			_, ok := cl.queryMap.Load(0)
 			assert.False(t, ok)
 		})

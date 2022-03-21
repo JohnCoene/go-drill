@@ -89,8 +89,8 @@ jobs:
         run: |
           sudo chmod +rwx -R /opt
           mkdir /opt/drill
-          sh -c 'wget -O - http://apache.mirrors.hoobly.com/drill/drill-1.17.0/apache-drill-1.17.0.tar.gz | tar -xz'
-          mv apache-drill-1.17.0/* /opt/drill/
+          sh -c 'wget -O - http://apache.mirrors.hoobly.com/drill/drill-1.19.0/apache-drill-1.19.0.tar.gz | tar -xz'
+          mv apache-drill-1.19.0/* /opt/drill/
           cp smoketest/storage-plugins-override.conf /opt/drill/conf/
           if [ $KERBEROS = "true" ]; then
             cp smoketest/drill-override-kerberos.conf /opt/drill/conf/drill-override.conf
@@ -109,20 +109,19 @@ jobs:
         id: go
 
       - name: Get dependencies
-        run: |
-          go get -v -t -d ./...
-          if [ -f Gopkg.toml ]; then
-              curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-              dep ensure
-          fi
+        run: go mod download all
 
       - name: Run smoke test
         if: ${{ !matrix.kerberos }}
-        run: go run github.com/ory/go-acc -o coverage.out . ./sasl ./internal/data -- -race -v -tags smoke -run ^Example$
+        run: |
+          go install github.com/ory/go-acc@latest
+          go-acc -o coverage.out ./... -- -race -v -tags smoke -run ^Example$
 
       - name: Run Smoke Test Kerberos
         if: ${{ matrix.kerberos }}
-        run: go run github.com/ory/go-acc -o coverage.out . ./sasl ./internal/data -- -race -v -tags smoke,kerberos -run ^Example_kerberos$
+        run: |
+          go install github.com/ory/go-acc@latest
+          go-acc -o coverage.out ./... -- -race -v -tags smoke,kerberos -run ^Example_kerberos$
 
       - name: Codecov
         uses: codecov/codecov-action@v1.0.12
