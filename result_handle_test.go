@@ -9,8 +9,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/apache/arrow/go/arrow"
-	"github.com/apache/arrow/go/arrow/array"
+	"github.com/apache/arrow/go/v7/arrow"
+	"github.com/apache/arrow/go/v7/arrow/array"
 	"github.com/factset/go-drill/internal/rpc/proto/common"
 	"github.com/factset/go-drill/internal/rpc/proto/exec/rpc"
 	"github.com/factset/go-drill/internal/rpc/proto/exec/shared"
@@ -430,6 +430,7 @@ func (m *mockRecord) NewSlice(i, j int64) array.Record { return nil }
 func (m *mockRecord) Schema() *arrow.Schema {
 	return m.Called().Get(0).(*arrow.Schema)
 }
+func (m *mockRecord) MarshalJSON() ([]byte, error) { return nil, nil }
 
 func TestRowBatchPrecision(t *testing.T) {
 	tests := []struct {
