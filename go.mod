@@ -12,6 +12,6 @@ require (
 	github.com/jcmturner/gokrb5/v8 v8.4.1
 	github.com/rs/zerolog v1.21.0
 	github.com/stretchr/testify v1.7.0
-	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 	google.golang.org/protobuf v1.27.1
 )
