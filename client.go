@@ -160,6 +160,10 @@ func (d *Client) NewConnection(ctx context.Context) (Conn, error) {
 
 	newClient.nextBit = d.nextBit
 
+	if eindex >= len(newClient.drillBits) {
+		eindex = 0
+	}
+
 	if newClient.Opts.ZKPath == "" {
 		newClient.Opts.ZKPath = "/drill/" + newClient.Opts.ClusterName
 	}

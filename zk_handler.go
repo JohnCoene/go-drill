@@ -2,6 +2,7 @@ package drill
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/factset/go-drill/internal/log"
@@ -73,6 +74,10 @@ func (z *zkHandler) GetDrillBits() []string {
 // GetEndpoint returns the information necessary to connect to a given drillbit
 // from its name.
 func (z *zkHandler) GetEndpoint(drillbit string) Drillbit {
+	// Sometimes the path is wrong: unsure why
+	if !strings.Contains(z.Path, "/drill/") {
+		z.Path = "/drill/" + z.Path
+	}
 	data, _, err := z.conn.Get(z.Path + "/" + drillbit)
 	if err != nil {
 		z.Err = err
