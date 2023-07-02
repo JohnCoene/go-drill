@@ -68,7 +68,7 @@ func (z *zkHandler) GetDrillBits() []string {
 		z.Err = err
 	}
 
-	log.Printf("%+v %+v", children, stat)
+	fmt.Printf("children: %+v - stat: %+v\n", children, stat)
 	return children
 }
 

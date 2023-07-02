@@ -401,6 +401,7 @@ func (d *Client) Connect(ctx context.Context) error {
 		d.drillBits[i], d.drillBits[j] = d.drillBits[j], d.drillBits[i]
 	})
 
+	fmt.Printf("d.drillBits len: %v\n", len(d.drillBits))
 	d.nextBit = 1
 	return d.ConnectEndpoint(ctx, zoo.GetEndpoint(d.drillBits[0]))
 }
