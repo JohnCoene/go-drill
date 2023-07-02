@@ -397,11 +397,12 @@ func (d *Client) Connect(ctx context.Context) error {
 	defer zoo.Close()
 
 	d.drillBits = zoo.GetDrillBits()
+	fmt.Printf("pre shuffle d.drillBits len: %v\n", len(d.drillBits))
 	rand.Shuffle(len(d.drillBits), func(i, j int) {
 		d.drillBits[i], d.drillBits[j] = d.drillBits[j], d.drillBits[i]
 	})
 
-	fmt.Printf("d.drillBits len: %v\n", len(d.drillBits))
+	fmt.Printf("post shuffle d.drillBits len: %v\n", len(d.drillBits))
 	d.nextBit = 1
 	return d.ConnectEndpoint(ctx, zoo.GetEndpoint(d.drillBits[0]))
 }

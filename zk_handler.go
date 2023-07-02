@@ -62,13 +62,12 @@ func newZKHandler(path string, nodes ...string) (*zkHandler, error) {
 // GetDrillBits returns the list of drillbit names that can in turn be passed to
 // GetEndpoint to get the endpoint information to connect to them.
 func (z *zkHandler) GetDrillBits() []string {
-	fmt.Printf("Path: %v -\n", z.Path)
 	children, stat, err := z.conn.Children(z.Path)
 	if err != nil {
 		z.Err = err
 	}
 
-	fmt.Printf("children: %+v - stat: %+v\n", children, stat)
+	log.Printf("children: %+v - stat: %+v\n", children, stat)
 	return children
 }
 
